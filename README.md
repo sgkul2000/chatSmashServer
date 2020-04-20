@@ -1,0 +1,2 @@
+# chatSmashServer
+Server for chatSmash
