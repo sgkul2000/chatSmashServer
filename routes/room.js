@@ -33,9 +33,12 @@ router.get('/getRoomList/:username/', async (req, res) => {
 
 //create user
 router.post('/newUser/', async (req, res) => {
-    const userDB = await mongo.getUsersDb();
-    var cond = await userDB.find({username: req.body.name});
-    if (cond = []) {
+    try {
+        const userDB = await mongo.getUsersDb();
+        var cond = await userDB.find({
+            username: req.body.name
+        });
+        if (cond === []) {
             await userDB.updateMany({
                 username: req.body.name
             }, {
@@ -48,8 +51,12 @@ router.post('/newUser/', async (req, res) => {
             }, {
                 upsert: true
             });
+        }
+        res.status(201).send();
+    } catch (err) {
+        console.log(err);
+        res.status(404).send()
     }
-    res.status(200).send();
 });
 
 
