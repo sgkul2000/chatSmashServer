@@ -35,22 +35,17 @@ router.get('/getRoomList/:username/', async (req, res) => {
 router.post('/newUser/', async (req, res) => {
     try {
         const userDB = await mongo.getUsersDb();
-        var cond = await userDB.find({
-            username: req.body.name
-        });
-        if (cond === []) {
-            await userDB.updateMany({
-                username: req.body.name
-            }, {
-                $set: {
+        const cond = await userDB.findOne({ username: req.body.name });
+        console.log(cond);
+        if ( cond === null ) {
+            await userDB.insertOne({
                     username: req.body.name,
                     nickname: req.body.nickname,
                     dateCreated: new Date,
                     rooms: ['Team chatSmash']
                 }
-            }, {
-                upsert: true
-            });
+                );
+                console.log('user added');
         }
         res.status(201).send();
     } catch (err) {
