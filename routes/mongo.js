@@ -1,6 +1,6 @@
 const mongodb = require('mongodb');
 // const mongoUri = "mongodb://localhost:27017"
-const mongoUri = "mongodb+srv://shreesh:gottastoreemall@projectcorontine-ohoqg.mongodb.net/test?retryWrites=true&w=majority";
+const mongoUri = "mongodb+srv://shreesh:storekaroyaar@projectcorontine-ohoqg.mongodb.net/STtest?retryWrites=true&w=majority";
 
 
 module.exports = class mongo {
